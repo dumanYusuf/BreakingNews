@@ -14,12 +14,12 @@ interface NewsApi {
         @Query("apiKey") apiKey: String = Constans.API_KEY
     ): NewsDto
 
-    @GET("everything")
-    suspend fun searchNews(
-        @Query("q") searchQuery: String,
-        @Query("apiKey") apiKey: String = Constans.API_KEY
-    ): NewsDto
 
+    @GET("top-headlines")
+    suspend fun getBbcNews(
+        @Query("sources") sources:String="bbc-news",
+        @Query("apiKey") apiKey: String=Constans.API_KEY
+    ):NewsDto
 
 
 }

@@ -12,5 +12,12 @@ class NewsRepoImpl @Inject constructor(private val api:NewsApi):NewsRepo {
         return api.getBreakingNews(country)
     }
 
+    override suspend fun getBbcNews(): NewsDto {
+        return api.getBbcNews()
+    }
+
+
+
+
 
 }

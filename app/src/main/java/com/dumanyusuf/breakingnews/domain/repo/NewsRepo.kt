@@ -6,6 +6,7 @@ interface NewsRepo {
 
 
      suspend fun getNewsList(country:String):NewsDto
+     suspend fun getBbcNews():NewsDto
 
 
 }

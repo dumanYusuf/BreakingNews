@@ -43,6 +43,8 @@ fun HomePageView(
     }
 
     val state by viewModel.state.collectAsState()
+    val stateBbc by viewModel.stateBbc.collectAsState()
+
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
 
@@ -221,7 +223,82 @@ fun HomePageView(
                         }
                         
                         // News List
-
+                        LazyColumn(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(horizontal = 16.dp)
+                        ) {
+                            items(stateBbc.newList) { article ->
+                                Card(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(vertical = 8.dp)
+                                        .clickable { /* Handle click */ },
+                                    shape = RoundedCornerShape(12.dp),
+                                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                                ) {
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(120.dp)
+                                    ) {
+                                        // News Image
+                                        AsyncImage(
+                                            model = article.urlToImage,
+                                            contentDescription = article.title,
+                                            modifier = Modifier
+                                                .width(120.dp)
+                                                .fillMaxHeight()
+                                                .clip(RoundedCornerShape(topStart = 12.dp, bottomStart = 12.dp)),
+                                            contentScale = ContentScale.Crop
+                                        )
+                                        
+                                        // News Content
+                                        Column(
+                                            modifier = Modifier
+                                                .fillMaxSize()
+                                                .padding(12.dp),
+                                            verticalArrangement = Arrangement.SpaceBetween
+                                        ) {
+                                            // Title
+                                            Text(
+                                                text = article.title ?: "",
+                                                style = MaterialTheme.typography.titleMedium,
+                                                maxLines = 2,
+                                                overflow = TextOverflow.Ellipsis
+                                            )
+                                            
+                                            // Source and Time
+                                            Row(
+                                                modifier = Modifier.fillMaxWidth(),
+                                                horizontalArrangement = Arrangement.SpaceBetween,
+                                                verticalAlignment = Alignment.CenterVertically
+                                            ) {
+                                                // Source
+                                                Text(
+                                                    text = article.description?: "",
+                                                    style = MaterialTheme.typography.bodySmall,
+                                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                                )
+                                                
+                                                // Time badge
+                                                Surface(
+                                                    color = MaterialTheme.colorScheme.primaryContainer,
+                                                    shape = RoundedCornerShape(4.dp)
+                                                ) {
+                                                    Text(
+                                                        text = "17:46",
+                                                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+                                                        style = MaterialTheme.typography.bodySmall,
+                                                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                                                    )
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
