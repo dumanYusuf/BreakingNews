@@ -24,6 +24,9 @@ class HomePageViewModel @Inject constructor(
     private val _stateBbc= MutableStateFlow<HomeState>(HomeState())
     val stateBbc:StateFlow<HomeState> = _stateBbc
 
+    private val _searchResults = MutableStateFlow<HomeState>(HomeState())
+    val searchResults: StateFlow<HomeState> = _searchResults
+
 
     init {
         loadBbcNews()
@@ -80,6 +83,23 @@ class HomePageViewModel @Inject constructor(
             }
         }.launchIn(viewModelScope)
 
+    }
+
+    fun searchNews(query: String) {
+        if (query.isEmpty()) {
+            _searchResults.value = _stateBbc.value
+            return
+        }
+
+        val filteredList = _stateBbc.value.newList.filter { article ->
+            article.title?.contains(query, ignoreCase = true) == true ||
+            article.description?.contains(query, ignoreCase = true) == true
+        }
+
+        _searchResults.value = HomeState(
+            newList = filteredList,
+            isLoading = false
+        )
     }
 
 

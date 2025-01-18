@@ -44,6 +44,11 @@ fun HomePageView(
 
     val state by viewModel.state.collectAsState()
     val stateBbc by viewModel.stateBbc.collectAsState()
+    val searchResults by viewModel.searchResults.collectAsState()
+
+    LaunchedEffect(searchQuery) {
+        viewModel.searchNews(searchQuery)
+    }
 
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
@@ -228,7 +233,7 @@ fun HomePageView(
                                 .fillMaxSize()
                                 .padding(horizontal = 16.dp)
                         ) {
-                            items(stateBbc.newList) { article ->
+                            items(if (isSearchVisible) searchResults.newList else stateBbc.newList) { article ->
                                 Card(
                                     modifier = Modifier
                                         .fillMaxWidth()

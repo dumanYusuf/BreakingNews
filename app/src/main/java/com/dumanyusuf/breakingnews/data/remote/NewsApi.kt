@@ -22,4 +22,5 @@ interface NewsApi {
     ):NewsDto
 
 
+
 }
