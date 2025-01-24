@@ -25,7 +25,7 @@ Gelen verilerin isLoading,errormessage ve success olma durumlarına göre değer
 </p>
 
 <p align="center">
-  <img src="https://github.com/dumanYusuf/BreakingNews/blob/master/news3.png?raw=true" width="400" />
+<img src="https://github.com/dumanYusuf/BreakingNews/blob/master/news4.png?raw=true" width="400" />
 </p>
 
 
