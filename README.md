@@ -3,7 +3,8 @@
 ![image alt](https://github.com/dumanYusuf/BreakingNews/blob/master/news1.png?raw=true)
 ![image alt](https://github.com/dumanYusuf/BreakingNews/blob/master/news2.png?raw=true)
 ![image alt](https://github.com/dumanYusuf/BreakingNews/blob/master/news3.png?raw=true)
-<img src="https://github.com/dumanYusuf/BreakingNews/blob/master/news1.png?raw=true" width="400">
-<img src="https://github.com/dumanYusuf/BreakingNews/blob/master/news2.png?raw=true" width="400">
-<img src="https://github.com/dumanYusuf/BreakingNews/blob/master/news3.png?raw=true" width="400">
+<img src="https://github.com/dumanYusuf/BreakingNews/blob/master/news1.png?raw=true" width="400" height="300">
+<img src="https://github.com/dumanYusuf/BreakingNews/blob/master/news2.png?raw=true" width="400" height="300">
+<img src="https://github.com/dumanYusuf/BreakingNews/blob/master/news3.png?raw=true" width="400" height="300">
+
 
