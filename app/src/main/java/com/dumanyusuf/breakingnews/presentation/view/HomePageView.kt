@@ -25,15 +25,20 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.dumanyusuf.breakingnews.Screan
 import com.dumanyusuf.breakingnews.presentation.HomePageViewModel
+import com.google.gson.Gson
 import kotlinx.coroutines.launch
+import java.net.URLEncoder
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomePageView(
     viewModel: HomePageViewModel = hiltViewModel(),
+    navController: NavController
 ) {
     var isSearchVisible by remember { mutableStateOf(false) }
     var searchQuery by remember { mutableStateOf("") }
@@ -146,6 +151,11 @@ fun HomePageView(
                                             model = article.urlToImage,
                                             contentDescription = article.title,
                                             modifier = Modifier
+                                                .clickable {
+                                                    val productObject = Gson().toJson(article)
+                                                    val encodedProductObject = URLEncoder.encode(productObject, "UTF-8")
+                                                    navController.navigate(Screan.DetailPageView.route+"/$encodedProductObject")
+                                                }
                                                 .fillMaxSize()
                                                 .clip(RoundedCornerShape(16.dp)),
                                             contentScale = ContentScale.Crop
@@ -236,9 +246,14 @@ fun HomePageView(
                             items(if (isSearchVisible) searchResults.newList else stateBbc.newList) { article ->
                                 Card(
                                     modifier = Modifier
+                                        .clickable {
+                                            val productObject = Gson().toJson(article)
+                                            val encodedProductObject = URLEncoder.encode(productObject, "UTF-8")
+                                            navController.navigate(Screan.DetailPageView.route+"/$encodedProductObject")
+                                        }
                                         .fillMaxWidth()
                                         .padding(vertical = 8.dp)
-                                        .clickable { /* Handle click */ },
+                                        ,
                                     shape = RoundedCornerShape(12.dp),
                                     elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
                                 ) {
@@ -254,7 +269,8 @@ fun HomePageView(
                                             modifier = Modifier
                                                 .width(120.dp)
                                                 .fillMaxHeight()
-                                                .clip(RoundedCornerShape(topStart = 12.dp, bottomStart = 12.dp)),
+                                                .clip(RoundedCornerShape(topStart = 12.dp, bottomStart = 12.dp)
+                                                ),
                                             contentScale = ContentScale.Crop
                                         )
                                         
